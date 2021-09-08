@@ -21,7 +21,7 @@
     </p>
     <p>
       To develop efficiently, have a local web server running. Python has a simple, built-in server. Use <tt>python -m http.server</tt> for python 3; use <tt>python -m SimpleHTTPServer 8000</tt> for python 2 (execute python in cmd for version number).
-    </p>  
+    </p>
     <p>
       Here are some SVG resources:
       <ul>
@@ -33,11 +33,11 @@
           <li> <a href="https://www.sarasoueidan.com/blog/svg-transformations/">https://www.sarasoueidan.com/blog/svg-transformations/</a></li>
       </ul>
     </p>
-    
-  
-  
-  
-  
+
+
+
+
+
     <h5>HTML for today:</h5>
 
     <h3>Shapes and Coordinates</h3>
@@ -45,10 +45,21 @@
     <p>The coordinate system starts at the top left corner, (0,0). Positive y values move down towards the bottom. Positive x values move towards the right. We can use DOM attributes or CSS to apply styles to elements.</p>
 
     <br>
-    
+
     <!--- SVG goes here! --->
-    
-    
+
+    <!-- no path thing is necessary -->
+    <svg width=500 height=500 style="border: 1px solid black; margin: 30px;">
+      <!-- stuff on bottom, order matters in layering -->
+      <line x1=25 x2=50 y1=25 y2=300 stroke="goldenrod" stroke-width=3 />
+      <circle cx=50 cy=300 r=20 fill="purple"/>
+      <!-- anything goes over will cut off, unless you put in a lot of work; called clipping -->
+      <rect x=100 y=400 width=200 height=200 fill="orange" stroke="limegreen" stroke-width=5 />
+      <rect x=300 y=50 width=200 height=200 fill="orange" style="fill:deepskyblue; stroke:red; stroke-width:10" />
+      <text x=100 y=100 style="font: bold 20px sans-serif;" dominant-baseline="hanging" text-anchor="middle"> HELLO </text>
+    </svg>
+
+
 
 
     <h3>Paths</h3>
@@ -58,7 +69,7 @@
     <br>
 
     <svg height=200 width=200 style="border:1px solid black; margin-bottom: 50px;">
-      
+
       <!--- Making some gridlines! --->
       <path style="stroke:#ccc; stroke-width:1" d="M 0 20 H 200" />
       <path style="stroke:#ccc; stroke-width:1" d="M 0 40 H 200" />
@@ -81,11 +92,13 @@
       <path style="stroke:#ccc; stroke-width:1" d="M 180 0 V 200" />
 
       <!--- Now let's draw a polygon --->
-      
-      
-      
-      
-      
+
+      <path style="stroke: lightpink; stroke-width:10; fill: limegreen;" d="M 40 40 H 140 L 100 100 V 180 H 20 Z" />
+
+
+
+
+
     </svg>
 
 
@@ -100,54 +113,54 @@
     <br>
 
     <p>First, let's mark the origin, (0,0).</p>
-    
-    
+
+
     <svg height="200" width="200">
-      
+
     </svg>
-    
+
 
     <p>Now let's move the origin to the center. The g tag assigns properties to sets of elements.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Let's create some circles in our translated space.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Let's perform a translation on one of the circles.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Let's both perform a translation and scale one of the circles.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>The order matters! What happens if we scale first and then perform a translation?</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Finally, let's try rotating our coordinate system.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Note: It can be very confusing if you get the order wrong when rotate() gets involved!</p>
-    
-    
-    
-    
+
+
+
+
 
   </div>
 </body>
