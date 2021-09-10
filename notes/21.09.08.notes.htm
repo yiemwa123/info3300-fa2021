@@ -21,7 +21,7 @@
     </p>
     <p>
       To develop efficiently, have a local web server running. Python has a simple, built-in server. Use <tt>python -m http.server</tt> for python 3; use <tt>python -m SimpleHTTPServer 8000</tt> for python 2 (execute python in cmd for version number).
-    </p>  
+    </p>
     <p>
       Here are some SVG resources:
       <ul>
@@ -33,11 +33,11 @@
           <li> <a href="https://www.sarasoueidan.com/blog/svg-transformations/">https://www.sarasoueidan.com/blog/svg-transformations/</a></li>
       </ul>
     </p>
-    
-  
-  
-  
-  
+
+
+
+
+
     <h5>HTML for today:</h5>
 
     <h3>Shapes and Coordinates</h3>
@@ -45,10 +45,10 @@
     <p>The coordinate system starts at the top left corner, (0,0). Positive y values move down towards the bottom. Positive x values move towards the right. We can use DOM attributes or CSS to apply styles to elements.</p>
 
     <br>
-    
+
     <!--- SVG goes here! --->
-    
-    
+
+
 
 
     <h3>Paths</h3>
@@ -58,7 +58,7 @@
     <br>
 
     <svg height=200 width=200 style="border:1px solid black; margin-bottom: 50px;">
-      
+
       <!--- Making some gridlines! --->
       <path style="stroke:#ccc; stroke-width:1" d="M 0 20 H 200" />
       <path style="stroke:#ccc; stroke-width:1" d="M 0 40 H 200" />
@@ -81,11 +81,11 @@
       <path style="stroke:#ccc; stroke-width:1" d="M 180 0 V 200" />
 
       <!--- Now let's draw a polygon --->
-      
-      
-      
-      
-      
+
+
+
+
+
     </svg>
 
 
@@ -100,54 +100,66 @@
     <br>
 
     <p>First, let's mark the origin, (0,0).</p>
-    
-    
+
+
     <svg height="200" width="200">
-      
+      <g transform="translate(100,100)">
+        <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
+        <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
+      <g>
+
     </svg>
-    
+
 
     <p>Now let's move the origin to the center. The g tag assigns properties to sets of elements.</p>
-    
-    
-    
-    
+
+
+    <svg height="200" width="200">
+      <g transform="translate(100,50), scale(1.5)">
+        <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
+        <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
+        <circle r=10 cx=30 cy=40 fill="red"/>
+        <circle r=10 cx=20 cy=60 fill="aquamarine"/>
+      <g>
+
+    </svg>
+
 
     <p>Let's create some circles in our translated space.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Let's perform a translation on one of the circles.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Let's both perform a translation and scale one of the circles.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>The order matters! What happens if we scale first and then perform a translation?</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Finally, let's try rotating our coordinate system.</p>
-    
-    
-    
-    
+
+
+
+
 
     <p>Note: It can be very confusing if you get the order wrong when rotate() gets involved!</p>
-    
-    
-    
-    
+
+
+
+
 
   </div>
 </body>
