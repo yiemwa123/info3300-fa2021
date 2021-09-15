@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
   <link rel="stylesheet" href="../css/hljs-base16.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-  
+
   <!--- D3 IMPORT HERE --->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <!--- D3 IMPORT HERE --->
@@ -66,43 +66,51 @@
 
   <!--- Code for today's class --->
   <script id="notes">
-  
+
   // New import! (see <head> of document)
-  
-  
-  
-  
+
+
+
+
   // 1. How can we select elements? What is the difference between select() and selectAll()?
+let div1=document.getElementById("d1");
+console.log(div1);
+div1.innerHTML="testing";
+div1.style.color="red";
+
+let d3div1=d3.select("#d1");
+console.log(d3div1);
+
+d3div1.text("Isn't d3 amazing?").style("color", "teal").style("background-color", "aquamarine").style("font-weight", "bold");
 
 
 
 
-  
-  
+
   // 2a. How can we create new elements, and set their attributes and styles?
-  
-  
-  
-  
+
+
+
+
   // 2b. How do we create lots of elements (but not using data just yet)?
   // let colors = ["yellow", "blue", "pink", "green"];
-  // 
+  //
   // function randomPixel() {
   //   return Math.random() * svg.attr("height");    }
-  // 
+  //
   // function randomColor() {
   //   return colors[Math.floor(Math.random() * colors.length)]
   // }
 
-  
-  
-  
+
+
+
   // 3. How do we update the attributes of existing elements?
-  
-  
-  
-  
-  
+
+
+
+
+
 
   </script>
 
@@ -110,7 +118,7 @@
 
   <!--- calls the highlight library to fill the <pre> tag with code --->
   <script>
-  
+
   function sanitize(s) {
     return s.replace("<br>", "\\n")
             .replace(/&/g, "&amp;")

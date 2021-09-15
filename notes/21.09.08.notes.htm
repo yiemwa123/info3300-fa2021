@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="../css/normalize.css">
   <link rel="stylesheet" type="text/css" href="../css/skeleton.css">
   <link rel="stylesheet" type="text/css" href="../css/custom-style.css">
-  
+
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
   <link rel="stylesheet" href="../css/hljs-base16.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
@@ -49,23 +49,18 @@
     <br>
 
     <!--- SVG goes here! --->
-<<<<<<< HEAD
-
-
-=======
     <svg width=500 height=500 style="border: 1px solid black; margin: 30px;">
       <!--- stuff on the bottom --->
       <line x1=25 x2=50 y1=25 y2=300 stroke="goldenrod" stroke-width=3 />
       <circle cx=50.5 cy=300 r=20 fill="purple" />
       <rect x=100 y=400 width=200 height=200 fill="orange" stroke="limegreen" stroke-width=5 />
       <rect x=300 y=50 width=200 height=200 style="fill:deepskyblue; stroke:red; stroke-width:10;" />
-      
+
       <text x=100 y=100 style="font: bold 20px sans-serif;" dominant-baseline="hanging" text-anchor="middle"> HELLO </text>
-      
+
       <!--- stuff on the top --->
     </svg>
-    
->>>>>>> 5f8b40532ef81d270a6b832cf499e4349d400005
+
 
 
     <h3>Paths</h3>
@@ -98,19 +93,12 @@
       <path style="stroke:#ccc; stroke-width:1" d="M 180 0 V 200" />
 
       <!--- Now let's draw a polygon --->
-<<<<<<< HEAD
-
-
-
-
-
-=======
       <path style="stroke:lightpink; stroke-width:10; fill:limegreen;"
-         d="M 40 40 
-            H 140 
+         d="M 40 40
+            H 140
             L 100 100
-            V 180 
-            H 20 
+            V 180
+            H 20
             Z" />
       <!-- in plain english:
         Move the pencil to 40,40
@@ -120,10 +108,9 @@
         Make a horizontal line until x=20 (i.e. 20,180)
         Close out the path by returning to the first drawn point
       --->
-      
-      
-      
->>>>>>> 5f8b40532ef81d270a6b832cf499e4349d400005
+
+
+
     </svg>
 
 
@@ -137,99 +124,35 @@
 
     <br>
 
-<<<<<<< HEAD
-    <p>First, let's mark the origin, (0,0).</p>
-
-
-    <svg height="200" width="200">
-      <g transform="translate(100,100)">
-        <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
-        <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
-      <g>
-
-    </svg>
-
-
-    <p>Now let's move the origin to the center. The g tag assigns properties to sets of elements.</p>
-
-<!-- translate should always be first in the string -->
-
-    <svg height="200" width="200">
-      <g transform="translate(100,50), scale(1.5)">
-        <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
-        <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
-        <circle r=10 cx=30 cy=40 fill="red"/>
-        <circle r=10 cx=20 cy=60 fill="aquamarine"/>
-      <g>
-
-    </svg>
-
-
-    <p>Let's create some circles in our translated space.</p>
-
-
-
-
-
-    <p>Let's perform a translation on one of the circles.</p>
-
-
-
-
-
-    <p>Let's both perform a translation and scale one of the circles.</p>
-
-
-
-
-
-    <p>The order matters! What happens if we scale first and then perform a translation?</p>
-
-
-
-
-
-    <p>Finally, let's try rotating our coordinate system.</p>
-
-
-
-
-
-    <p>Note: It can be very confusing if you get the order wrong when rotate() gets involved!</p>
-
-
-
-
-=======
     <p>First, let's mark the origin (0,0) with crosshairs.</p>
-    
+
     <svg height="200" width="200">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
         <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
     </svg>
-    
+
     <p>The g tag "groups" elements so that it is easy to assign properties to sets of elements with one command.</p>
-    
+
     <svg height="200" width="200">
       <g class="datapoints" style="stroke: black; stroke-width:3;">
         <line x1="-10" x2="10" y1="0" y2="0" />
         <line y1="-10" y2="10" x1="0" x2="0" />
       </g>
     </svg>
-    
-    
+
+
     <p>Now let's move the origin to the center using a translate(dx,dy) transformation.</p>
-    
+
     <svg height="200" width="200">
       <g transform="translate(100,100)">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
         <line y1="-10" y2="10" x1="0" x2="0" style="stroke: black; stroke-width:3;"/>
       </g>
     </svg>
-    
+
 
     <p>Let's create some shapes in our translated space. Note how their position on screen is adjusted by the translation, but the cx and cy of the circle stay the same. A circle at (30,40) shows onscreen at (130,140) if you apply translate(100,100).</p>
-    
+
     <svg height="200" width="200">
       <g transform="translate(100,50) scale(1.5)">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
@@ -238,12 +161,12 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
-    
-    
+
+
+
 
     <p>You can also perform a translation inside of a translation!.</p>
-    
+
     <svg height="200" width="200">
       <g transform="translate(100,50)">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
@@ -254,12 +177,12 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
-    
-    
+
+
+
 
     <p>Let's both perform a translation and scale one of the shapes. Transforms are processed in order, starting with the last one in the string.</p>
-    
+
     <svg height="200" width="200">
       <g transform=" translate(100,50) scale(1.5)">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
@@ -268,11 +191,11 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
-    
+
+
 
     <p>The order matters! What happens if we scale first and then perform a translation? It looks weird because scale() and rotate() do this *with respect to (0,0)*. So scaling *after* moving pushes things a bit further because they expand out from (0,0). </p>
-    
+
     <svg height="200" width="200">
       <g transform="scale(1.5) translate(100,50)">
         <line x1="-10" x2="10" y1="0" y2="0" style="stroke: black; stroke-width:3;"/>
@@ -281,7 +204,7 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
+
 
     <p>Finally, let's try rotating our coordinate system. rotate(degrees) allows for this.</p>
     <svg height="200" width="200">
@@ -292,8 +215,7 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
->>>>>>> 5f8b40532ef81d270a6b832cf499e4349d400005
+
 
     <p>Note: It can be very confusing if you get the order wrong when rotate() gets involved! It also uses (0,0) as a point of rotation, so if you move things first then they will get spun about (0,0), leading to odd results. </p>
     <svg height="200" width="200">
@@ -304,7 +226,7 @@
         <circle r=10 cx=20 cy=60 fill="aquamarine"/>
       </g>
     </svg>
-    
+
   </div>
 </body>
 </html>
