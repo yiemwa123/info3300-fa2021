@@ -38,23 +38,17 @@
   </p>
   <p>
     Some other useful links: <a href="https://observablehq.com/@d3/d3-autotype">d3 autotype</a> | <a href="https://observablehq.com/@d3/continuous-scales#scale_symlog">different d3 scales</a> | <a href="https://observablehq.com/@d3/d3-scaleordinal">d3 ordinal scales</a> | <a href="https://github.com/d3/d3-format">d3 tick formatting</a>
-  </p>
+
   <h5>HTML for today:</h5>
 
   <svg id="scatterplot" height="400" width="600" style="margin-top:50px" >
     <text id="label" x="590" y="5"  text-anchor="end" alignment-baseline="hanging"></text>
-<<<<<<< HEAD
 
 
   </svg>
 
   <div id="scatterLegend" class="legend"> </div>
 
-=======
-  </svg>
-  <!--- <button id="gross">Show by Gross Income</button>
-  <button id="genre">Show by Genre</button> --->
->>>>>>> 21afb29f65a72463bcab9ad2da57ac9d0da3f5bd
 
 
 
@@ -67,11 +61,10 @@
 
   <!--- Code for today's class --->
   <script id="notes">
-  
+
   // ---- 1
   // 0. Let's make a fancy scatterplot
   const svg = d3.select("svg#scatterplot");
-<<<<<<< HEAD
 
   const width = svg.attr("width");
   const height = svg.attr("height");
@@ -87,23 +80,8 @@
 
   let chartArea = svg.append("g").attr("id","points")
                   .attr("transform",`translate(${margin.left},${margin.top})`);
-=======
-  
-  const width = svg.attr("width");
-  const height = svg.attr("height");
-  const margin = {top: 10, right: 10, bottom: 50, left: 50};
-  
-  const chartWidth = width - margin.left - margin.right;
-  const chartHeight = height - margin.top - margin.bottom;
->>>>>>> 1768db0bc01aa02e10c52597a3cd07370352adb3
 
-  // This time we'll use another layer to make sure things stay ordered properly
-  //  Remember that SVG draws from the top down, layering things on top of one another
-  let annotations = svg.append("g").attr("id","annotations");
-                  // No translate here since our annotations may be outside of the chart area
-                  
-  let chartArea = svg.append("g").attr("id","points")
-                  .attr("transform",`translate(${margin.left},${margin.top})`);
+
 
   // Make sure the text label is on the top using raise()
   d3.select("#label").raise();
@@ -124,14 +102,11 @@
   // 0. Check for data issues
   console.log(data)
   data.forEach( d => {
-<<<<<<< HEAD
     // Do we need to fix anything in our dataset?
 
-=======
     // We noticed that there were commas and $ which broke the type coercion from string to number
     d['worldwide_gross'] = Number( d['worldwide_gross'].replace(/,/g, "").replace(/\$/g,"") );
-    
->>>>>>> 1768db0bc01aa02e10c52597a3cd07370352adb3
+
   });
   console.log(data)
 
@@ -139,56 +114,23 @@
   // 1. Building the scales we need
   const yearExtent = d3.extent(data, d => d['year']);
   const yearScale = d3.scaleLinear().domain(yearExtent).range([0, chartWidth]);
-<<<<<<< HEAD
 
   const grossExtent = d3.extent(data, d => d['worldwide_gross']);
   const grossScale = d3.scaleLog().domain(grossExtent).range([chartHeight, 0]);
 
-=======
-  
-  const grossExtent = d3.extent(data, d => d['worldwide_gross']);
-  const grossScale = d3.scaleLog().domain(grossExtent).range([chartHeight, 0]);
-  
->>>>>>> 1768db0bc01aa02e10c52597a3cd07370352adb3
   const imdbExtent = d3.extent(data, d => d['imdb_rating']);
   const imdbScale = d3.scaleLinear().domain(imdbExtent).range([3,8]);
 
 
-<<<<<<< HEAD
 
-  // 2. Draw some axes, make them fancy through using tickFormat
-  //   Look at the documentation for d3.format to see all of the different options
-  //       d3 tickformatting: https://github.com/d3/d3-format
-
-  // let leftAxis=
-  //
-  // annotations.append("g"). attr("class", "y axis").attr("transform", `translate(${margin.left-10}, ${margin.top})`).call(leftAxis);
-  //
-  // annotations.append("g"). attr("class", "y gridlines").attr("transform", `translate(${margin.left-10}, ${margin.top})`).call(leftGridlines);
-
-
-
-
-
-  // 3. Start plotting circles and see what happens
-  data.forEach( (d, i) => {
-
-    // Make each circle
-
-    let circle= chartArea.append("circle").attr("cx", yearScale(d['year'])).attr("cy", grossScale(d['worldwide_gross'])).attr("r", imdbScale(d["imdb_rating"])).style("fill", "steelblue").attr("opacity", "1").attr("label", "circle").attr("genre")
-
-
-
-=======
-  
   // 1a. How do we color by genre?
   // NEW - in order to color points by film genre, we need a new color scale
   //  To do this, we use d3.scaleOrdinal. Unlike other scales, this doesn't generally need a domain or range
   //  Instead, you give it a color scheme to use for its coloring (see d3 color docs)
   //  It will build up its domain as you use it to color new items
   const genreScale = d3.scaleOrdinal(d3.schemeCategory10);
-  
-  
+
+
   // 2. Draw some axes, make them fancy through using tickFormat
   //   Look at the documentation for d3.format to see all of the different options
   //       d3 tickformatting: https://github.com/d3/d3-format
@@ -197,20 +139,20 @@
   let leftGridlines = d3.axisLeft(grossScale)
                         .tickSize(-chartWidth-10)
                         .tickFormat("")
-  
+
   // Y axis
   annotations.append("g")
     .attr("class", "y axis")
     .attr("transform",`translate(${margin.left-10},${margin.top})`)
     .call(leftAxis)
-  
+
     // .selectAll("text")   // Hack to prevent label overlap
     // .style("text-anchor","end");
   annotations.append("g")
     .attr("class", "y gridlines")
     .attr("transform",`translate(${margin.left-10},${margin.top})`)
     .call(leftGridlines);
-  
+
   // X axis
   let bottomAxis = d3.axisBottom(yearScale)
                      .tickFormat(d3.format("~f"));  // exact value without commas
@@ -225,12 +167,12 @@
     .attr("class", "x gridlines")
     .attr("transform",`translate(${margin.left},${chartHeight+margin.top+10})`)
     .call(bottomGridlines);
-    
+
   // DON'T FORGET:
   // If you're going to use d3.axis to make gridlines using the negative tickSize trick...
   // You need to use CSS styles to lighten up the gridlines and HIDE the .domain line
   // e.g. (assuming you give the <g> a gridlines class like the example does)
-  
+
   // .gridlines line {
   //   stroke: #bbb;
   // }
@@ -238,41 +180,64 @@
   // .gridlines .domain {
   //   stroke: none;
   // }
-  
-  
+
+
   // 3. Start plotting circles and see what happens
-  data.forEach( (d, i) => {
-    
-    let circle = chartArea.append("circle")
-        .attr("cx", yearScale(d['year']))
-        .attr("cy", grossScale(d['worldwide_gross']+1))
-        .attr("r", imdbScale(d['imdb_rating']))
+  // data.forEach( (d, i) => {
+  //
+
+    let circle=d3.selectAll("circle").data(data).join('circle')
+        .attr("cx", d=>yearScale(d['year']))
+        .attr("cy", d=>grossScale(d['worldwide_gross']+1))
+        .attr("r", d=>imdbScale(d['imdb_rating']))
         .attr("opacity", 0.8)
-        .attr("fill", genreScale(d['Main_Genre']) )  // refer to scaleOrdinal in scales section
-        .attr("label", d["title"])
-        .attr("genre", d["Main_Genre"]);
-        
->>>>>>> 1768db0bc01aa02e10c52597a3cd07370352adb3
-    // 4. How do we add colors based on genre?
-    //  New color scale: https://observablehq.com/@d3/d3-scaleordinal
+        .attr("fill", d=>genreScale(d['Main_Genre']) )  // refer to scaleOrdinal in scales section
+        .attr("label", d=>d["title"])
+        .attr("genre", d=>d["Main_Genre"]);
+
+  //   // 4. How do we add colors based on genre?
+  //   //  New color scale: https://observablehq.com/@d3/d3-scaleordinal
+  //
+  //
+  //
+  //   // --- 2
+  //   // 5. Add some mouseovers
+  //
+  //   // do not use arrow functions for an on function
+  //
+    circle.on("mouseover", function(){
+
+      d3.select(this)
+      .transition().duration(200)
+      .attr("stroke", "black")
+      .attr("stroke-width", 4)
+      .attr("r", d=>imdbScale(d['imdb_rating'])+2)
+      .attr("fill", d=>lighten(genreScale(d['Main_Genre']));
+
+
+    });
+
+    circle.on("mouseout", function(){
+
+      d3.select(this)
+      .transition().duration(200)
+      .attr("stroke-width", 0)
+      .attr("r", d=>imdbScale(d['imdb_rating']))
+      .attr("fill", d=>lighten(genreScale(d['Main_Genre'])));
+
+      d3.select(this).datum()['title'];
+
+    });
 
 
 
-    // --- 2
-    // 5. Add some mouseovers
-<<<<<<< HEAD
-
-
-
-=======
-    
-      
-    
->>>>>>> 1768db0bc01aa02e10c52597a3cd07370352adb3
 
   });
   // done with forEach
-<<<<<<< HEAD
+
+
+  //What about interactivity?
+  // d3.select['#gross']
 
 
 
@@ -280,16 +245,6 @@
   // --- 3
   // Check out the results of genreScale now that we've colored a bunch of points
   // Use this to add a legend!
-=======
-  
-  
-  
-  
-  
-  // What about interactivity?
-  // d3.select("#gross").on( ???,  ??? )
-  
->>>>>>> 21afb29f65a72463bcab9ad2da57ac9d0da3f5bd
 
 
 
