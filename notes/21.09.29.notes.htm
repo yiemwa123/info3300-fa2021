@@ -2,19 +2,26 @@
 <title>INFO 3300 - September 29</title>
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Raleway:400,700" rel="stylesheet">
-  
+
   <link rel="stylesheet" type="text/css" href="../css/normalize.css">
   <link rel="stylesheet" type="text/css" href="../css/skeleton.css">
   <link rel="stylesheet" type="text/css" href="../css/custom-style.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
   <link rel="stylesheet" href="../css/hljs-base16.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-  
+
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  
+
   <style>
-  
-    
+
+  .gridlines .domain{
+    display: none;
+  }
+
+  .gridlines line{
+    stroke: #444;
+
+  }
 
   </style>
 
@@ -39,10 +46,10 @@
   </p>
 
   <h5>HTML for today:</h5>
-  
+
   <svg id="lineplot" height="500" width="800" style="margin-top:50px" >
   </svg>
-  
+
 
 
   <!-- This block will be automatically filled with syntax-highlighted code from the script below -->
@@ -70,30 +77,53 @@
   // Import some CSV data
   d3.csv("../datasets/co2.csv", d3.autoType)
     .then( (data) => {
-      
+
   // 1. Check data quality
   console.log(data)
-  
-  
+
+  const timeParser=d3.timeParse('%Y-%m-%d');
+  data.forEach(d=>{
+    d['data']=timeParser(d['String Date']);
+  });
+
+  console.log(data)
+
+
   // 2. Scales
-  
-  
+
+  const carbonExtent=d3.extent(data, d=>d['Carbon Dioxide (ppm)']);
+  const carbonScale=d3.scaleLinear().domain(carbonExtent).range([chartHeight,0]);
+
+  const dataExtent=d3.extent(data, d=> d['date']);
+  console.log(dataExtent);
+  const dataScale=d3.scaleTime().domain(dataExtent).range([0,chartWidth]);
+
+
+  let leftAxis=d3.axisLeft(carbonScale);
+  let leftGridlines=d3.axisLeft(carbonScale).tickFormat("").tickSize(-chartWidth-5);
+
+  annotations.append("g").attr("class", "y axis").attr("transform", `translate(${margin.left-10},${margin.top})`);
+
+  annotations.append("g").attr("class", "y gridlines").attr("transform", `translate(${margin.left-10},${margin.top})`);
+
+
+
   // 3. Before we start drawing, we need a line generator
   //  this will help us to draw the path based on data, which otherwise is very complicated
-  
-  
-  
-  // 4. Append a <path>, bind the data, and run the generator 
-  
-  
-  
+
+
+
+  // 4. Append a <path>, bind the data, and run the generator
+
+
+
   // 5. Let's add some circles too!
-  
-  
-  
-  
+
+
+
+
   // 6. Stretch goal - add a detailed mouseover
-  
+
   // Add marker lines, circles, and label to use in our mouseovers
   // let mouseGroup = chartArea.append("g");
   // let xMarker = mouseGroup.append("line")
@@ -104,7 +134,7 @@
   //   .attr("y1",0)
   //   .attr("y2",chartHeight)
   //   .attr("visibility","hidden");
-  // 
+  //
   // let valueMarker = mouseGroup.append("circle")
   //   .attr("id","valueMarker")
   //   .attr("fill","none")
@@ -112,39 +142,39 @@
   //   .attr("stroke-width",2)
   //   .attr("r",10)
   //   .attr("visibility","hidden");
-  // 
+  //
   // let label = mouseGroup.append("text")
   //   .attr("id","label")
   //   .attr("visibility","hidden");
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
   // end of .then()
-  });  
-  
-  
-  
-  
-  
-  
+  });
+
+
+
+
+
+
   </script>
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
 
   <!--- calls the highlight library to fill the <pre> tag with code --->
   <script>
-  
+
   function sanitize(s) {
     return s.replace("<br>", "\\n")
             .replace(/&/g, "&amp;")
