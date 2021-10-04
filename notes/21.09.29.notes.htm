@@ -13,7 +13,6 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <style>
-<<<<<<< HEAD
 
   .gridlines .domain{
     display: none;
@@ -23,17 +22,15 @@
     stroke: #444;
 
   }
-=======
-  
+
   .gridlines .domain {
     display: none;
   }
-  
+
   .gridlines line {
     stroke: #444;
   }
-    
->>>>>>> 7971e6ddc0ce82ca233c9d4e16ecebe37c02cee1
+
 
   </style>
 
@@ -73,7 +70,7 @@
 
   <!--- Code for today's class --->
   <script id="notes1">
-  
+
   // Do the usual things to set up the chart area and incorporate margins
   const svg = d3.select("svg#lineplot");
   const width = svg.attr("width");
@@ -91,7 +88,6 @@
     .then( (data) => {
 
   // 1. Check data quality
-<<<<<<< HEAD
   console.log(data)
 
   const timeParser=d3.timeParse('%Y-%m-%d');
@@ -104,29 +100,22 @@
 
   // 2. Scales
 
-  const carbonExtent=d3.extent(data, d=>d['Carbon Dioxide (ppm)']);
-  const carbonScale=d3.scaleLinear().domain(carbonExtent).range([chartHeight,0]);
-
   const dataExtent=d3.extent(data, d=> d['date']);
   console.log(dataExtent);
   const dataScale=d3.scaleTime().domain(dataExtent).range([0,chartWidth]);
 
 
-  let leftAxis=d3.axisLeft(carbonScale);
-  let leftGridlines=d3.axisLeft(carbonScale).tickFormat("").tickSize(-chartWidth-5);
 
   annotations.append("g").attr("class", "y axis").attr("transform", `translate(${margin.left-10},${margin.top})`);
 
   annotations.append("g").attr("class", "y gridlines").attr("transform", `translate(${margin.left-10},${margin.top})`);
 
-=======
   //    Mercifully, the data import cleanly (because I already did some cleanup in Excel!)
   //      but... we need dates to work correctly -- for this we need JS Date objects
   console.log(data);
 
   // Make some Date objects
   // "2008-4-1" ---> %Y-%m-%d pattern
-  const timeParser = d3.timeParse('%Y-%m-%d');
   data.forEach( d => {
     d['date'] = timeParser(d["String Date"]);
   });
@@ -135,6 +124,9 @@
   //  First one is easy
   const carbonExtent = d3.extent(data, d => d['Carbon Dioxide (ppm)']);
   const carbonScale = d3.scaleLinear().domain(carbonExtent).range([chartHeight, 0]);
+
+
+    console.log(carbonScale);
 
   // 2. Second, we need to spread dates across the X axis
   // Since we made JS date objects, we can use the usual D3 functions and a .scaleTime()
@@ -168,12 +160,11 @@
     .attr("class", "x gridlines")
     .attr("transform",`translate(${margin.left},${chartHeight+margin.top+10})`)
     .call(bottomGridlines);
->>>>>>> 7971e6ddc0ce82ca233c9d4e16ecebe37c02cee1
 
 
   // 3. Before we start drawing, we need a line generator
   //  this will help us to draw the path based on data, which otherwise is very complicated
-<<<<<<< HEAD
+
 
 
 
@@ -184,7 +175,6 @@
   // 5. Let's add some circles too!
 
 
-=======
   // NOTE: The line generator does not take in any data at this stage
   //  We're just "programming" it to know what to do when you hand it data
   //  In other words, we're saying "when you get a data point, here's what your X value should be" using functions
@@ -194,7 +184,7 @@
                   .curve(d3.curveMonotoneX);  // this configures whether straight lines connect your data points
                                               //  or if it blends between points using a curve; see d3.line docs
 
-  // 4. Append a <path>, bind the data, and run the generator 
+  // 4. Append a <path>, bind the data, and run the generator
   //  The generator is "run" in the last command.
   chartArea.append("path")
            .datum(data)
@@ -216,13 +206,13 @@
            .attr("fill", "navy")
            .attr("cx", d => dateScale(d['date']) )
            .attr("cy", d => carbonScale(d['Carbon Dioxide (ppm)']) );
->>>>>>> 7971e6ddc0ce82ca233c9d4e16ecebe37c02cee1
+
 
 
   // 6. Stretch goal - add a detailed mouseover
 
   // Add marker lines, circles, and label to use in our mouseovers
-<<<<<<< HEAD
+
   // let mouseGroup = chartArea.append("g");
   // let xMarker = mouseGroup.append("line")
   //   .attr("id","xMarker")
@@ -253,8 +243,6 @@
 
 
 
-
-=======
   let mouseGroup = chartArea.append("g");
   let xMarker = mouseGroup.append("line")
     .attr("id","xMarker")
@@ -299,7 +287,7 @@
     .attr("height",chartHeight)
     .attr("fill","none")
     .attr("pointer-events","all");
-    
+
   // activeRegion is now the top-most item (even if invisible), so it should always catch the mouse events and never clash
   // We will do some housekeeping to turn on and off the mouseover annotations when the mouse leaves or enters activeRegion
 
@@ -307,38 +295,35 @@
   activeRegion.on("mouseover", function() {
     xMarker.attr("visibility","");
     valueMarker.attr("visibility","");
-    label.attr("visibility",""); 
+    label.attr("visibility","");
   });
 
   // When the mouse leaves, hide the annotations
   activeRegion.on("mouseout", function() {
     xMarker.attr("visibility","hidden");
     valueMarker.attr("visibility","hidden");
-    label.attr("visibility","hidden"); 
+    label.attr("visibility","hidden");
   });
 
   // Handle when the mouse moves over the chart
   // To improve usability, we will find the data point that is closest to the mouse location
   // This is easier for users than trying to point to small individual points
-  
+
   // We'll need a way to find the closest point to a specific date (from where the mouse is on the X axis)
   activeRegion.on('mousemove', function(evt) {
     console.log(evt) // update on move
     let location = d3.pointer(evt);
     console.log(location)
-    
+
     // figure out what point is closest to our mouse
-    
+
     // update our markers
-    
+
   })
-  
-  
-  
-  
-  
-  
->>>>>>> 7971e6ddc0ce82ca233c9d4e16ecebe37c02cee1
+
+
+
+
   // end of .then()
   });
 
